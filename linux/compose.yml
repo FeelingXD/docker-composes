@@ -1,0 +1,11 @@
+version: '3'
+services:
+  linux:
+    image: ubuntu:latest
+    container_name: linux
+    tty: true
+    stdin_open: true
+    environment:
+      - TZ=Asia/Seoul
+    volumes:
+      - ./volumn:/volumn
