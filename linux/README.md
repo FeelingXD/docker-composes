@@ -5,3 +5,4 @@
 ### 의존성
 - ubuntu :latest
 - volumn [option]
+- workdir [option]
