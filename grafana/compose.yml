@@ -1,0 +1,36 @@
+version: '3'
+services:
+  grafana:
+    image: grafana/grafana:11.4.2
+    container_name: grafana
+    ports:
+      - "3000:3000"
+    environment:
+      - TZ=Asia/Seoul
+    volumes:
+      - ./data:/var/lib/grafana
+      - ./provisioning:/etc/grafana/provisioning
+    depends_on:
+      - mariadb
+    networks:
+      - grafana-net
+
+  mariadb:
+    image: mariadb:latest
+    container_name: mariadb
+    ports:
+      - "3306:3306"
+    environment:
+      - TZ=Asia/Seoul
+      - MYSQL_ROOT_PASSWORD=1234
+      - MYSQL_DATABASE=grafana
+      - MYSQL_USER=grafana
+      - MYSQL_PASSWORD=1234
+    volumes:
+      - ./mariadb:/var/lib/mysql
+    networks:
+      - grafana-net
+
+networks:
+  grafana-net:
+    driver: bridge
